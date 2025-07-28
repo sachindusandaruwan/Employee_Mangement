@@ -38,3 +38,16 @@ export const getEmployeeById = async (req: Request, res: Response) => {
         res.status(500).json({ message: "Error fetching employee", error });
     }
 }
+
+export const deleteEmployee = async (req: Request, res: Response) => {
+    try {
+        const employee = await Employee.findByIdAndDelete(req.params.id);
+        if (!employee) {
+            return res.status(404).json({ message: "Employee not found" });
+        }
+        res.status(200).json({ message: "Employee deleted successfully" });
+    } catch (error) {
+        console.error("Error deleting employee:", error);
+        res.status(500).json({ message: "Error deleting employee", error });
+    }
+}
