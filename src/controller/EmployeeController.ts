@@ -14,3 +14,14 @@ export const saveEmployee = async (req: Request, res: Response) => {
         res.status(500).json({ message: "Error creating task", error });
     }
 }
+
+
+export const getAllEmployees = async (req: Request, res: Response) => {
+    try {
+        const employees = await Employee.find();
+        res.status(200).json(employees);
+    } catch (error) {
+        console.error("Error fetching employees:", error);
+        res.status(500).json({ message: "Error fetching employees", error });
+    }
+};
